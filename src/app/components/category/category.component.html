@@ -1,0 +1,22 @@
+<h1>Categories</h1>
+
+<p *ngIf="!categories"><em>Loading...</em></p>
+
+<table class='table' *ngIf="categories">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cat of categories">
+            <td>#{{ cat['id'] }}</td>
+            <td>{{ cat.name }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
