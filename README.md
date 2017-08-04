@@ -1,6 +1,6 @@
-# Ng
+# Northwind Traders sample client application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+This is sample application to manage sample database.
 
 ## Development server
 
