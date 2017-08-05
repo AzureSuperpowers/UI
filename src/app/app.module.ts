@@ -15,6 +15,9 @@ import { OrderComponent } from './components/order/order.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { SettingComponent } from './components/setting/setting.component';
 
+import { ApiService } from './services/api/api.service';
+import { SettingService } from './services/setting/setting.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,10 @@ import { SettingComponent } from './components/setting/setting.component';
       { path: '**', redirectTo: 'home' }
     ])
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    SettingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

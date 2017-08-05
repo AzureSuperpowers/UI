@@ -1,3 +1,40 @@
-<p>
-  setting works!
-</p>
+<h1>Settings</h1>
+<blockquote>
+  <p>
+    Use this screen to manage global settings of this client application
+  </p>
+</blockquote>
+<div class="form form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-md-2">Api EndPoint Url</label>
+    <div class="col-md-5">
+      <div class="input-group">
+        <input class="form-control" [value]="settingService.setting.endPointUrl" #endPoint />
+        <a class="input-group-addon btn btn-default" (click)="settingService.setEndPoint(endPoint.value)">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">Headers</label>
+    <div class="col-md-10">
+      <div class="row" *ngFor="let header of settingService.setting.headers">
+        <div class="col-md-2">
+          <div class="input-group">
+            <input class="form-control" [value]="header.key" #headerKey /><a class="input-group-addon btn btn-danger" (click)="settingService.setHeader(headerKey.value,undefined)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <input class="form-control" [value]="header.value" #headerValue />
+            <a class="input-group-addon btn btn-default" (click)="settingService.setHeader(headerKey.value,headerValue.value)">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
