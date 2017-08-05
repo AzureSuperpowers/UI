@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AlertModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { HttpModule, RequestOptions } from '@angular/http';
+import { MyOptions } from './my-options';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -15,7 +17,7 @@ import { OrderComponent } from './components/order/order.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { SettingComponent } from './components/setting/setting.component';
 
-import { ApiService } from './services/api/api.service';
+import { ApiService, EmployeeService, CustomerService } from './services/api/api.service';
 import { SettingService } from './services/setting/setting.service';
 
 @NgModule({
@@ -34,7 +36,7 @@ import { SettingService } from './services/setting/setting.service';
   ],
   imports: [
     BrowserModule,
-    AlertModule.forRoot(),
+    HttpModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
@@ -51,7 +53,10 @@ import { SettingService } from './services/setting/setting.service';
   ],
   providers: [
     ApiService,
-    SettingService
+    EmployeeService,
+    CustomerService,
+    SettingService,
+    { provide: RequestOptions, useClass: MyOptions }
   ],
   bootstrap: [AppComponent]
 })

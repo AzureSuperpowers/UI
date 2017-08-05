@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../../models/employee';
+import { EmployeeService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor() { }
+  employees: Employee[];
+  constructor(
+    private apiService: EmployeeService
+  ) {
+  }
 
   ngOnInit() {
+    this.apiService.getAll().subscribe(r => {
+      this.employees = r;
+    })
   }
 
 }
