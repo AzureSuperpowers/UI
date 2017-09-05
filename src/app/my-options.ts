@@ -18,8 +18,9 @@ export class MyOptions extends RequestOptions {
 
   setHeader() {
     this.headers = new Headers();
-    this.settingService.setting.headers.forEach(h => {
-      this.headers.append(h.key, h.value);
-    });
+    console.log(this);
+    // this.settingService.settings.headers.forEach(h => {
+    //   this.headers.append(h.key, h.value);
+    // });
   }
 }

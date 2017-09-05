@@ -8,11 +8,22 @@ import { SettingService } from '../../services/setting/setting.service';
 })
 export class SettingComponent implements OnInit {
 
+  public settings: any;
+
   constructor(
     public settingService: SettingService
   ) { }
 
   ngOnInit() {
+    this.settingService.settingChange.subscribe(
+      item => {
+        console.log(item);
+        this.settings = item;
+      }
+    )
   }
 
+  save() {
+    this.settingService.setSetting(this.settings);
+  }
 }

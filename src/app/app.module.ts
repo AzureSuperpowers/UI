@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AlertModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { HttpModule, RequestOptions } from '@angular/http';
@@ -37,6 +38,7 @@ import { SettingService } from './services/setting/setting.service';
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

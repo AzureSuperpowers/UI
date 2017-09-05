@@ -6,45 +6,46 @@ import { Setting } from '../../models/setting';
 export class SettingService {
 
   private settingKey: string = 'nwt_settings';
-  setting: Setting = <Setting>{};
-  settingChange = new BehaviorSubject<Setting>(null);
+  settings: {};
+  settingChange = new BehaviorSubject<any>(null);
 
   constructor() {
-    let setting = <Setting>JSON.parse(localStorage.getItem(this.settingKey));
-    if (setting) this.setSetting(setting);
+    let settings = JSON.parse(localStorage.getItem(this.settingKey));
+    console.log(settings);
+    if (settings) this.setSetting(settings);
   }
 
-  setSetting(setting: Setting) {
-    this.setting = setting;
-    if (this.setting == null) {
+  setSetting(settings: any) {
+    this.settings = settings;
+    if (this.settings == null) {
       localStorage.removeItem(this.settingKey);
     } else {
-      localStorage.setItem(this.settingKey, JSON.stringify(setting));
+      localStorage.setItem(this.settingKey, JSON.stringify(settings));
     }
-    this.settingChange.next(this.setting);
+    this.settingChange.next(this.settings);
   }
 
-  setEndPoint(endPoint: string) {
-    this.setting.endPointUrl = endPoint;
-    this.setSetting(this.setting);
+  setEndPoint(name: string, endPoint: string) {
+    this.settings[name].endPointUrl = endPoint;
+    this.setSetting(this.settings);
   }
 
-  setHeader(key: string, value: string) {
-    let result = this.setting.headers.filter((h: any) => { return h.key == key });
+  setHeader(name:string, key: string, value: string) {
+    let result = this.settings[name].headers.filter((h: any) => { return h.key == key });
     let header: any = { key: key, value: value };
     if (result.length > 0) {
       header = result[0];
       //delete
       if (!!!value) {
-        let index = this.setting.headers.indexOf(header);
-        this.setting.headers.splice(index, 1);
+        let index = this.settings[name].headers.indexOf(header);
+        this.settings[name].headers.splice(index, 1);
       } else {
         header.key = key;
         header.value = value;
       }
     } else {
-      this.setting.headers.push(header);
+      this.settings[name].headers.push(header);
     }
-    this.setSetting(this.setting);
+    this.setSetting(this.settings);
   }
 }

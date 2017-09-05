@@ -18,7 +18,7 @@ export class ApiService<T> {
   ) { }
 
   getAll(): Observable<T[]> {
-    return this.http.get(`${this.settingService.setting.endPointUrl}${this.endPoint}`, )
+    return this.http.get(`${this.settingService.settings[this.endPoint].endPointUrl}`, )
       .map((response: Response) => response.json());
   }
 }

@@ -4,37 +4,42 @@
     Use this screen to manage global settings of this client application
   </p>
 </blockquote>
-<div class="form form-horizontal">
+
+<a class="btn btn-default btn-xs" (click)="settingService.settings.push({})">+</a>
+<a class="btn btn-default btn-xs" (click)="save()">Save</a>
+
+<div class="form form-horizontal" *ngFor="let s of settingService.settings">
   <div class="form-group">
-    <label class="control-label col-md-2">Api EndPoint Url</label>
+    <label class="control-label col-md-2">Name</label>
     <div class="col-md-5">
-      <div class="input-group">
-        <input class="form-control" [value]="settingService.setting.endPointUrl" #endPoint />
-        <a class="input-group-addon btn btn-default" (click)="settingService.setEndPoint(endPoint.value)">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i></a>
-      </div>
+      <input class="form-control" [(ngModel)]="s.name" #name />
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-md-2">Headers</label>
+    <label class="control-label col-md-2">Api EndPoint Url</label>
+    <div class="col-md-5">
+      <input class="form-control" [(ngModel)]="s.endPointUrl" #endPoint />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-2">Headers
+        <a class="btn btn-default btn-xs" (click)="s.headers.push({})">+</a>
+    </label>
     <div class="col-md-10">
-      <div class="row" *ngFor="let header of settingService.setting.headers">
+      <div class="row" *ngFor="let header of s.headers">
         <div class="col-md-2">
           <div class="input-group">
-            <input class="form-control" [value]="header.key" #headerKey /><a class="input-group-addon btn btn-danger" (click)="settingService.setHeader(headerKey.value,undefined)">
+            <input class="form-control" [(ngModel)]="header.key" #headerKey />
+            <a class="input-group-addon btn btn-danger" (click)="s.headers.splice(s.headers.indexOf(header),1)">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </a>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="input-group">
-            <input class="form-control" [value]="header.value" #headerValue />
-            <a class="input-group-addon btn btn-default" (click)="settingService.setHeader(headerKey.value,headerValue.value)">
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-          </a>
-          </div>
+          <input class="form-control" [(ngModel)]="header.value" #headerValue />
         </div>
       </div>
     </div>
   </div>
+  <hr/>
 </div>
