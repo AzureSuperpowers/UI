@@ -105,6 +105,17 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
+:: 4. Angular Prod Build //If you had generated this yourself then please add this step manually!!)
+IF EXIST “%DEPLOYMENT_TARGET%/.angular-cli.json” (
+echo Building App in %DEPLOYMENT_TARGET%…
+pushd “%DEPLOYMENT_TARGET%”
+call :ExecuteCmd !NPM_CMD! run build
+:: If the above command fails comment above and uncomment below one
+:: call ./node_modules/.bin/ng build –prod
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+)
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 
