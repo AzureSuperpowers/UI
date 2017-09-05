@@ -1,3 +1,40 @@
-<p>
-  product works!
-</p>
+<h1>Products</h1>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table' *ngIf="products">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Qt Per Unit</th>
+      <th>Unit Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of products">
+      <td>
+        {{c.productId}}
+      </td>
+      <td>
+        <span *ngIf="c!=selectedProduct">{{c.productName}}</span>
+        <input *ngIf="c==selectedProduct" [(ngModel)]="selectedProduct.productName" class="form-control" type="text" />
+      </td>
+      <td>
+        <span *ngIf="c!=selectedProduct">{{c.quantityPerUnit}}</span>
+        <input *ngIf="c==selectedProduct" [(ngModel)]="selectedProduct.quantityPerUnit" class="form-control" type="text" />
+      </td>
+      <td>
+        <span *ngIf="c!=selectedProduct">{{c.unitPrice}}</span>
+        <input *ngIf="c==selectedProduct" [(ngModel)]="selectedProduct.unitPrice" class="form-control" type="number" />
+      </td>
+      <td>
+        <a class="btn btn-primary btn-xs" *ngIf="c==selectedProduct" (click)="save()"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+        <a class="btn btn-default btn-xs" *ngIf="c!=selectedProduct" (click)="selectProduct(c)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        <a class="btn btn-default btn-xs" *ngIf="c==selectedProduct" (click)="selectProduct()"><i class="fa fa-ban" aria-hidden="true"></i></a>
+        <!-- <a class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+      </td>
+    </tr>
+  </tbody>
+</table>

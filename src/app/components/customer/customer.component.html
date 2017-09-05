@@ -9,14 +9,30 @@
       <th>Company</th>
       <th>Contact</th>
       <th>Country</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let c of customers">
-      <td>{{c.RowKey}}</td>
-      <td>{{c.CompanyName}}</td>
-      <td>{{c.ContactName}}</td>
-      <td>{{c.Country}}</td>
+      <td>{{c.Id}}</td>
+      <td>
+        <span *ngIf="c!=selectedCustomer">{{c.CompanyName}}</span>
+        <input *ngIf="c==selectedCustomer" [(ngModel)]="selectedCustomer.CompanyName" class="form-control" type="text" />
+      </td>
+      <td>
+        <span *ngIf="c!=selectedCustomer">{{c.ContactName}}</span>
+        <input *ngIf="c==selectedCustomer" [(ngModel)]="selectedCustomer.ContactName" class="form-control" type="text" />
+      </td>
+      <td>
+        <span *ngIf="c!=selectedCustomer">{{c.Country}}</span>
+        <input *ngIf="c==selectedCustomer" [(ngModel)]="selectedCustomer.Country" class="form-control" type="text" />
+      </td>
+      <td>
+        <a class="btn btn-primary btn-xs" *ngIf="c==selectedCustomer" (click)="save()"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+        <a class="btn btn-default btn-xs" *ngIf="c!=selectedCustomer" (click)="selectCustomer(c)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        <a class="btn btn-default btn-xs" *ngIf="c==selectedCustomer" (click)="selectCustomer()"><i class="fa fa-ban" aria-hidden="true"></i></a>
+        <!-- <a class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+      </td>
     </tr>
   </tbody>
 </table>

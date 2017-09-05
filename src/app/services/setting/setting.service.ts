@@ -6,13 +6,18 @@ import { Setting } from '../../models/setting';
 export class SettingService {
 
   private settingKey: string = 'nwt_settings';
-  settings: {};
+  settings: any[];
   settingChange = new BehaviorSubject<any>(null);
 
   constructor() {
     let settings = JSON.parse(localStorage.getItem(this.settingKey));
-    console.log(settings);
     if (settings) this.setSetting(settings);
+  }
+
+  getSettings(name: string) {
+    var ss = this.settings.filter(s => { return s.name == name });
+    if (ss.length > 0) return ss[0];
+    return null;
   }
 
   setSetting(settings: any) {
@@ -30,7 +35,7 @@ export class SettingService {
     this.setSetting(this.settings);
   }
 
-  setHeader(name:string, key: string, value: string) {
+  setHeader(name: string, key: string, value: string) {
     let result = this.settings[name].headers.filter((h: any) => { return h.key == key });
     let header: any = { key: key, value: value };
     if (result.length > 0) {

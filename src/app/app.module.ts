@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { HttpModule, RequestOptions } from '@angular/http';
-import { MyOptions } from './my-options';
+// import { MyOptions } from './my-options';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -18,7 +18,7 @@ import { OrderComponent } from './components/order/order.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { SettingComponent } from './components/setting/setting.component';
 
-import { ApiService, EmployeeService, CustomerService } from './services/api/api.service';
+import { ApiService, EmployeeService, CustomerService, ProductService } from './services/api/api.service';
 import { SettingService } from './services/setting/setting.service';
 
 @NgModule({
@@ -58,7 +58,8 @@ import { SettingService } from './services/setting/setting.service';
     EmployeeService,
     CustomerService,
     SettingService,
-    { provide: RequestOptions, useClass: MyOptions }
+    ProductService
+    // { provide: RequestOptions, useClass: MyOptions }
   ],
   bootstrap: [AppComponent]
 })

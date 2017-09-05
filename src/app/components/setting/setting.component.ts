@@ -17,7 +17,6 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     this.settingService.settingChange.subscribe(
       item => {
-        console.log(item);
         this.settings = item;
       }
     )

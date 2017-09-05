@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { SettingService } from '../setting/setting.service';
-import { Employee } from '../../models/employee';
-import { Customer } from '../../models/customer';
+import { Employee, Customer, Product } from '../../models';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -15,11 +14,35 @@ export class ApiService<T> {
   constructor(
     private http: Http,
     private settingService: SettingService
-  ) { }
+  ) {
+
+  }
+
+  setting() {
+    return this.settingService.getSettings(this.endPoint);
+  }
+
+  options() {
+    let headers = new Headers();
+    if (this.setting().headers) {
+      console.log("headers")
+      this.setting().headers.forEach(h => {
+        headers.append(h.key, h.value);
+      });
+    }
+    headers.append('Content-Type', 'application/json');
+
+    let options = new RequestOptions({ headers: headers });
+    return options;
+  }
 
   getAll(): Observable<T[]> {
-    return this.http.get(`${this.settingService.settings[this.endPoint].endPointUrl}`, )
+    return this.http.get(`${this.setting().endPointUrl}`, this.options())
       .map((response: Response) => response.json());
+  }
+
+  save(model: T): Observable<Response> {
+    return this.http.post(`${this.setting().endPointUrl}`, model, this.options());
   }
 }
 
@@ -42,5 +65,16 @@ export class CustomerService extends ApiService<Customer>
   ) {
     super(_http, _settingService);
     this.endPoint = "customer";
+  }
+}
+
+@Injectable()
+export class ProductService extends ApiService<Product>
+{
+  constructor(private _http: Http,
+    private _settingService: SettingService
+  ) {
+    super(_http, _settingService);
+    this.endPoint = "product";
   }
 }
