@@ -8,7 +8,7 @@ import { SettingService } from '../../services/setting/setting.service';
 })
 export class SettingComponent implements OnInit {
 
-  public settings: any;
+  public settings: any = [];
 
   constructor(
     public settingService: SettingService
@@ -17,7 +17,9 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     this.settingService.settingChange.subscribe(
       item => {
-        this.settings = item;
+        if (item && item.length > 0) {
+          this.settings = item;
+        }
       }
     )
   }

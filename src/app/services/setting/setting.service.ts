@@ -6,7 +6,7 @@ import { Setting } from '../../models/setting';
 export class SettingService {
 
   private settingKey: string = 'nwt_settings';
-  settings: any[];
+  settings: any[] = [];
   settingChange = new BehaviorSubject<any>(null);
 
   constructor() {

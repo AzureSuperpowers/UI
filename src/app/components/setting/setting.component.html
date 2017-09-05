@@ -5,10 +5,10 @@
   </p>
 </blockquote>
 
-<a class="btn btn-default btn-xs" (click)="settingService.settings.push({})">+</a>
+<a class="btn btn-default btn-xs" (click)="settings.push({headers:[]})">+</a>
 <a class="btn btn-default btn-xs" (click)="save()">Save</a>
 
-<div class="form form-horizontal" *ngFor="let s of settingService.settings">
+<div class="form form-horizontal" *ngFor="let s of settings">
   <div class="form-group">
     <label class="control-label col-md-2">Name</label>
     <div class="col-md-5">
