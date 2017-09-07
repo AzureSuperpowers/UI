@@ -88,12 +88,6 @@ goto :EOF
 :Deployment
 echo Handling node.js deployment.
 
-REM :: 1. KuduSync
-REM IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-REM   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
-REM   IF !ERRORLEVEL! NEQ 0 goto error
-REM )
-
 :: 2. Select node version
 call :SelectNodeVersion
 

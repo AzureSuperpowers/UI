@@ -10,8 +10,10 @@
 `ng serve`
 
 ## Build for deployment  
-* Build  
-`ng build --prod`  
+* Using [Kuduscript](https://github.com/projectkudu/kudu/wiki/Custom-Deployment-Script) to generate deployment script  
+`npm install kuduscript -g`  
+`kuduscript -y --node`
+
 
 ## Configure EndPoints
 > Under Settings
